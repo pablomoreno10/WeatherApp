@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -7,19 +7,23 @@
     android:layout_height="match_parent"
     android:background="#242343"
     tools:context=".MainActivity">
+
+    <!-- Weather Icon -->
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="270dp"
         android:id="@+id/weatherIcon"
         android:src="@drawable/finding"
-        android:layout_marginTop="80dp">
-    </ImageView>
+        android:layout_marginTop="80dp"/>
+
+    <!-- Weather Information -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="50dp"
         android:orientation="vertical"
         android:layout_above="@id/cityFinder">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -28,8 +32,8 @@
             android:textSize="50sp"
             android:textStyle="bold"
             android:textColor="#ffffffff"
-            android:text="0*C">
-        </TextView>
+            android:text="0*C"/>
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -37,8 +41,8 @@
             android:textSize="30sp"
             android:textColor="@color/white"
             android:text="--------"
-            android:paddingStart="30sp">
-        </TextView>
+            android:paddingStart="30dp"/>
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -46,8 +50,20 @@
             android:textStyle="bold"
             android:textSize="40sp"
             android:text="Fetching___"
-            android:paddingStart="30sp"
-            android:textColor="@color/white">
-        </TextView>
+            android:paddingStart="30dp"
+            android:textColor="@color/white"/>
     </LinearLayout>
+
+    <!-- City Finder Button -->
+    <Button
+        android:id="@+id/cityFinder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="@color/white"
+        android:text="Find City"
+        android:textColor="@color/black"
+        android:padding="16dp"
+        android:layout_marginBottom="20dp"/>
 </RelativeLayout>

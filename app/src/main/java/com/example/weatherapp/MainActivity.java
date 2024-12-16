@@ -1,7 +1,9 @@
 package com.example.weatherapp;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
@@ -11,36 +13,44 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+
 import org.json.JSONObject;
+
 import cz.msebera.android.httpclient.Header;
+
 public class MainActivity extends AppCompatActivity {
     final String APP_ID = "e06a5b81fbd6dce3dc9ca74dcb4741d4";
     final String WEATHER_URL = "https://api.openweathermap.org/data/2.5/weather";
     final long MIN_TIME = 5000;
     final float MIN_DISTANCE = 1000;
     final int REQUEST_CODE = 101;
+
     String Location_Provider = LocationManager.GPS_PROVIDER;
+
     TextView NameofCity, weatherState, Temperature;
     ImageView mweatherIcon;
-    RelativeLayout mCityFinder;
+    Button mCityFinder; // Change this to Button
     LocationManager mLocationManager;
     LocationListener mLocationListner;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         weatherState = findViewById(R.id.weatherCondition);
         Temperature = findViewById(R.id.temperature);
         mweatherIcon = findViewById(R.id.weatherIcon);
-        mCityFinder = findViewById(R.id.cityFinder);
         NameofCity = findViewById(R.id.cityName);
+        mCityFinder = findViewById(R.id.cityFinder); // Correct ID usage and type
         mCityFinder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -120,33 +130,47 @@ public class MainActivity extends AppCompatActivity {
         mLocationManager.requestLocationUpdates(Location_Provider, MIN_TIME,
                 MIN_DISTANCE, mLocationListner);
     }
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[]
-            permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);//
-        if(requestCode==REQUEST_CODE)
-        {
-            if(grantResults.length>0 &&
-                    grantResults[0]==PackageManager.PERMISSION_GRANTED)public void onLocationChanged(Location location) {
-            String Latitude = String.valueOf(location.getLatitude());
-            String Longitude = String.valueOf(location.getLongitude());
-            RequestParams params =new RequestParams();
-            params.put("lat" ,Latitude);
-            params.put("lon",Longitude);
-            params.put("appid",APP_ID);
-            letsdoSomeNetworking(params);
+
+    private void startLocationUpdates() {
+        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // Request permissions if not already granted.
+            return;
         }
-            @Override
-            public void onStatusChanged(String provider, int status, Bundle extras){
-            }
-            @Override
-            public void onProviderEnabled(String provider) {
-        }
-            @Override
-            public void onProviderDisabled(String provider) {
-//not able to get location
-        }
-        };
+
+        locationManager.requestLocationUpdates(
+                LocationManager.GPS_PROVIDER,
+                1000, // Minimum time interval for updates (in milliseconds)
+                10,   // Minimum distance interval for updates (in meters)
+                new LocationListener() {
+                    @Override
+                    public void onLocationChanged(@NonNull Location location) {
+                        String latitude = String.valueOf(location.getLatitude());
+                        String longitude = String.valueOf(location.getLongitude());
+                        RequestParams params = new RequestParams();
+                        params.put("lat", latitude);
+                        params.put("lon", longitude);
+                        params.put("appid", APP_ID);
+                        letsdoSomeNetworking(params);
+                    }
+
+                    @Override
+                    public void onStatusChanged(String provider, int status, Bundle extras) {
+                        // Handle status change
+                    }
+
+                    @Override
+                    public void onProviderEnabled(@NonNull String provider) {
+                        // Handle provider enabled
+                    }
+
+                    @Override
+                    public void onProviderDisabled(@NonNull String provider) {
+                        // Handle provider disabled
+                    }
+                });
         if (ActivityCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED &&
