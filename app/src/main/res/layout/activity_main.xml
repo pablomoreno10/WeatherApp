@@ -11,7 +11,7 @@
     <!-- Weather Icon -->
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="270dp"
+        android:layout_height="350dp"
         android:id="@+id/weatherIcon"
         android:src="@drawable/finding"
         android:layout_marginTop="80dp"/>
@@ -25,31 +25,33 @@
         android:layout_above="@id/cityFinder">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/temperature"
-            android:paddingStart="30dp"
+            android:textAlignment="center"
             android:textSize="50sp"
             android:textStyle="bold"
             android:textColor="#ffffffff"
-            android:text="0*C"/>
+            android:text="0°C"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/weatherCondition"
-            android:textSize="30sp"
+            android:textSize="40sp"
             android:textColor="@color/white"
             android:text="--------"
-            android:paddingStart="30dp"/>
+            android:textAlignment="center"
+            />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/cityName"
             android:textStyle="bold"
-            android:textSize="40sp"
-            android:text="Fetching___"
+            android:textSize="45sp"
+            android:textAlignment="center"
+            android:text="Fetching..."
             android:paddingStart="30dp"
             android:textColor="@color/white"/>
     </LinearLayout>
@@ -61,9 +63,10 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:background="@color/white"
+        android:backgroundTint="#FFFF00"
         android:text="Find City"
+        android:textSize="45dp"
         android:textColor="@color/black"
-        android:padding="16dp"
-        android:layout_marginBottom="20dp"/>
+        android:padding="20dp"
+        android:layout_marginBottom="60dp"/>
 </RelativeLayout>

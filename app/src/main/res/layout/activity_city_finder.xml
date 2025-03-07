@@ -9,8 +9,8 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
         android:src="@drawable/left"
         android:id="@+id/backButton"
         android:layout_alignParentLeft="true"
@@ -19,12 +19,12 @@
     </ImageView>
     <EditText
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="80dp"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:hint="Enter Your City"
         android:layout_marginLeft="30dp"
-        android:textSize="20sp"
+        android:textSize="40sp"
         android:background="@drawable/edittextdesign"
         android:textColor="@color/black"
         android:imeOptions="actionGo"
